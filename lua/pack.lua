@@ -52,9 +52,12 @@ end, { desc = "Toggle into currently opened file" })
 
 -- mini-autopairs settings
 require("mini.pairs").setup({
-    mappings = {
-        ['<'] = { action = 'open', pair = '<>', neigh_pattern = '^[^\\]' }
-    },
+--  disabled until I realise how to fix it for comfortable cpp, cp programming lol 
+--
+--    mappings = {
+--       ['<'] = { action = 'open', pair = '<>', neigh_pattern = '[^%w<>][^%w<>]' }
+--    },
+--
 })
 
 -- mini-notify settings
