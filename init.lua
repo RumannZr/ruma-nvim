@@ -5,5 +5,5 @@ require("options")
 require("keymaps")
 require("commands")
 require("pack")
-
 vim.cmd.colorscheme("rose-pine")
+

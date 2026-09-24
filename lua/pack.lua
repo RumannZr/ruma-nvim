@@ -1,4 +1,4 @@
-vim.pack.add ({
+vim.pack.add({
     "https://github.com/rose-pine/neovim",
     "https://github.com/nvim-mini/mini.nvim",
     "https://github.com/rafamadriz/friendly-snippets",
@@ -6,6 +6,8 @@ vim.pack.add ({
     "https://github.com/neovim/nvim-lspconfig",
     "https://github.com/mason-org/mason.nvim",
     "https://github.com/tpope/vim-fugitive",
+    "https://github.com/akinsho/toggleterm.nvim",
+    "https://github.com/kdheepak/lazygit.nvim",
 })
 
 -- rose-pine settings
@@ -14,6 +16,21 @@ require("rose-pine").setup({
         transparency = true,
     },
 })
+
+-- toggleterm setup
+
+require("toggleterm").setup({
+    size = 20,
+    open_mapping = [[<c-\>]],
+    direction = "float",
+    float_opts = {
+        border = "curved",
+    },
+})
+
+-- lazygit settings
+
+vim.keymap.set("n", "<leader>lg", "<cmd>LazyGit<CR>", {desc = "Open lazygit panel"})
 
 -- mini-files settings
 
@@ -38,7 +55,7 @@ require("mini.pairs").setup({})
 
 -- mini-notify settings
 require("mini.notify").setup({
-	-- only show messages
+    -- only show messages
     content = {
         format = function(notif)
             return notif.msg
@@ -70,8 +87,9 @@ local MiniExtra = require("mini.extra")
 MiniPick.setup()
 MiniExtra.setup()
 
-vim.keymap.set("n", "<leader>pf", function() MiniPick.builtin.files() end, {desc = "Mini File Picker"})
-vim.keymap.set("n", "<leader>ps", function() MiniPick.builtin.grep({ pattern = vim.fn.expand("<cword>") }) end, { desc = "Grep word/Search word" })
+vim.keymap.set("n", "<leader>pf", function() MiniPick.builtin.files() end, { desc = "Mini File Picker" })
+vim.keymap.set("n", "<leader>ps", function() MiniPick.builtin.grep({ pattern = vim.fn.expand("<cword>") }) end,
+    { desc = "Grep word/Search word" })
 vim.keymap.set("n", "<leader>vh", function() MiniPick.builtin.help() end, { desc = "Mini Help" })
 
 vim.keymap.set("n", "<leader>xx", function() MiniExtra.pickers.diagnostic() end, { desc = "Mini Picker Diagnostics" })
@@ -100,11 +118,11 @@ MiniSnippets.setup({
 })
 MiniSnippets.start_lsp_server({ match = false })
 
---- mini-diff and fugitive settings 
+--- mini-diff and fugitive settings
 
 local MiniDiff = require("mini.diff")
 MiniDiff.setup({
-	source = MiniDiff.gen_source.git({ index = false }),
+    source = MiniDiff.gen_source.git({ index = false }),
 })
 
 vim.keymap.set("n", "<leader>gg", "<cmd>tabnew | Git | only<cr>", { desc = "Fugitive Full Page New Tab" })
@@ -115,4 +133,3 @@ require("treesitter")
 
 -- lsp settings
 require("lsp")
-
