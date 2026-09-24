@@ -51,7 +51,11 @@ vim.keymap.set("n", "<leader>-", function()
 end, { desc = "Toggle into currently opened file" })
 
 -- mini-autopairs settings
-require("mini.pairs").setup({})
+require("mini.pairs").setup({
+    mappings = {
+        ['<'] = { action = 'open', pair = '<>', neigh_pattern = '^[^\\]' }
+    },
+})
 
 -- mini-notify settings
 require("mini.notify").setup({
